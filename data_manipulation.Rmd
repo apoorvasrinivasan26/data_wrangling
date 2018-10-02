@@ -1,0 +1,66 @@
+---
+title: "data_manipulation"
+author: "Apoorva Srinivasan"
+date: "10/1/2018"
+output: github_document
+---
+
+
+```
+
+
+
+```{r}
+library(tidyverse)
+library(readr)
+options(tibble.print_min = 3)
+
+litters_data = read_csv("./data/FAS_litters.csv",
+  col_types = "ccddiiii")
+litters_data = janitor::clean_names(litters_data)
+
+pups_data = read_csv("./data/FAS_pups.csv",
+  col_types = "ciiiii")
+pups_data = janitor::clean_names(pups_data)
+
+```
+
+
+Selecting variables
+
+```{r}
+select(litters_data, group, litter_number, gd0_weight)
+```
+
+using select helpers
+
+```{r}
+select(litters_data, starts_with("gd"))
+```
+
+```{r}
+select(pups_data, litter_number,pd_ears)
+```
+
+```{r}
+filter(litters_data, pups_born_alive %in% 4:7, !is.na(gd0_weight))
+```
+
+
+```{r}
+mutate(litters_data, wt_gain = gd18_weight - gd0_weight)
+```
+
+```{r}
+mutate(pups_data, subtract = pd_pivot - 7)
+```
+
+```{r}
+    read_csv("./data/FAS_pups.csv"  , col_types = "ciiiii") %>% 
+  janitor ::clean_names() %>%
+  filter(sex == 1)%>%
+  select(-pd_ears)%>%
+  mutate(variable_subtract = pd_pivot - 7)
+  
+``
+

@@ -1,7 +1,27 @@
 ---
-title: "data_wrangling1"
+title: "data_wrangling"
 author: "Apoorva Srinivasan"
 date: "10/1/2018"
 output: github_document
 ---
+
+
+working with data wrangling
+
+```{r}
+library(tidyverse)
+library(readr)
+litters_data = read_csv(file = "./data/FAS_litters.csv")
+litters_data = janitor::clean_names(litters_data)
+```
+```{r}
+pups_data = read_csv(file = "./data/FAS_pups.csv")
+pups_data = janitor::clean_names(pups_data)
+```
+
+
+```{r}
+pulse_data = haven:::read_sas("./data/public_pulse_data.sas7bdat")
+
+```
 
